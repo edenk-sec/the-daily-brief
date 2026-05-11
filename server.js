@@ -1,0 +1,156 @@
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const PORT = 4000;
+const PUBLIC_DIR = path.join(__dirname, 'public');
+
+const MIME_TYPES = {
+  '.html': 'text/html',
+  '.css': 'text/css',
+  '.js': 'application/javascript',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon',
+};
+
+const server = http.createServer((req, res) => {
+  let urlPath = req.url === '/' ? '/index.html' : req.url;
+
+  if (req.url === '/api/articles') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(articles));
+    return;
+  }
+
+  const filePath = path.join(PUBLIC_DIR, urlPath);
+  const ext = path.extname(filePath);
+  const contentType = MIME_TYPES[ext] || 'text/plain';
+
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/html' });
+      res.end('<h1>404 Not Found</h1>');
+      return;
+    }
+    res.writeHead(200, { 'Content-Type': contentType });
+    res.end(data);
+  });
+});
+
+const articles = [
+  {
+    id: 1,
+    title: "Scientists Discover Potential Breakthrough in Quantum Computing",
+    summary: "Researchers at MIT have demonstrated a new qubit architecture that dramatically reduces error rates, bringing fault-tolerant quantum computing closer to reality.",
+    content: "A team of researchers at the Massachusetts Institute of Technology has announced a significant advancement in quantum computing. The new architecture leverages topological qubits that are inherently more resistant to environmental interference, achieving error rates 10x lower than previous designs.",
+    category: "Technology",
+    author: "Sarah Chen",
+    date: "2026-05-10",
+    readTime: "4 min read",
+    featured: true,
+    image: "tech"
+  },
+  {
+    id: 2,
+    title: "Global Climate Summit Reaches Historic Agreement on Carbon Emissions",
+    summary: "World leaders sign landmark accord committing to net-zero emissions by 2045, with binding enforcement mechanisms for the first time.",
+    content: "In a historic moment for international climate policy, representatives from 193 nations signed the Geneva Climate Accord, establishing legally binding emissions targets and a $500 billion green transition fund for developing nations.",
+    category: "World",
+    author: "Marcus Williams",
+    date: "2026-05-10",
+    readTime: "6 min read",
+    featured: true,
+    image: "world"
+  },
+  {
+    id: 3,
+    title: "Stock Markets Rally as Inflation Data Shows Promising Decline",
+    summary: "Major indices hit record highs after new CPI data reveals inflation cooling to 2.1%, bolstering hopes for interest rate cuts this quarter.",
+    content: "Wall Street celebrated as the Consumer Price Index dropped to 2.1% year-over-year, its lowest reading in three years. The S&P 500 surged 2.3% while tech stocks led gains across the board.",
+    category: "Finance",
+    author: "Jamie Torres",
+    date: "2026-05-09",
+    readTime: "3 min read",
+    featured: false,
+    image: "finance"
+  },
+  {
+    id: 4,
+    title: "New Study Links Mediterranean Diet to Reduced Dementia Risk",
+    summary: "A 15-year longitudinal study of 60,000 participants finds adherence to Mediterranean diet correlates with 30% lower risk of cognitive decline.",
+    content: "Researchers publishing in The Lancet today present compelling evidence that dietary patterns rich in olive oil, fish, legumes, and vegetables significantly protect brain health in aging populations.",
+    category: "Health",
+    author: "Dr. Aisha Patel",
+    date: "2026-05-09",
+    readTime: "5 min read",
+    featured: false,
+    image: "health"
+  },
+  {
+    id: 5,
+    title: "SpaceX Completes First Crewed Mars Mission Flyby",
+    summary: "Astronauts aboard the Ares I mission complete a historic 90-day orbital survey of Mars, returning with unprecedented data and photography.",
+    content: "The six-member crew of Ares I completed their closest approach to Mars, spending 12 days in Martian orbit and deploying a network of surface sensors before beginning the 7-month return journey to Earth.",
+    category: "Science",
+    author: "Leo Nakamura",
+    date: "2026-05-08",
+    readTime: "7 min read",
+    featured: true,
+    image: "science"
+  },
+  {
+    id: 6,
+    title: "AI Model Surpasses Human Performance in Medical Diagnosis",
+    summary: "A new diagnostic AI achieves 97.3% accuracy across 15 disease categories, outperforming specialist physicians in controlled clinical trials.",
+    content: "DeepHealth's latest model, trained on over 2 billion anonymized patient records, demonstrated remarkable diagnostic accuracy in a double-blind study across major research hospitals in the US and Europe.",
+    category: "Technology",
+    author: "Nina Okoye",
+    date: "2026-05-08",
+    readTime: "5 min read",
+    featured: false,
+    image: "tech"
+  },
+  {
+    id: 7,
+    title: "Major Cities Unveil 15-Minute City Urban Planning Initiative",
+    summary: "Paris, Barcelona, and Singapore lead a global movement to redesign urban infrastructure so residents can meet all daily needs within a 15-minute walk.",
+    content: "The 15-Minute City Coalition announced today that 47 cities worldwide have committed to restructuring zoning laws, transportation networks, and public services to create hyper-local, walkable neighborhoods.",
+    category: "World",
+    author: "Clara Beaumont",
+    date: "2026-05-07",
+    readTime: "4 min read",
+    featured: false,
+    image: "world"
+  },
+  {
+    id: 8,
+    title: "Renewable Energy Now Cheaper Than Coal in Every Country",
+    summary: "A milestone report from the International Energy Agency confirms solar and wind power have reached cost parity or lower in all 195 nations studied.",
+    content: "The IEA's annual energy report marks a turning point in the global energy transition. Utility-scale solar now averages $18/MWh globally, compared to $65/MWh for new coal plants, driven by manufacturing scale and technological improvements.",
+    category: "Science",
+    author: "Raj Mehta",
+    date: "2026-05-07",
+    readTime: "5 min read",
+    featured: false,
+    image: "science"
+  },
+  {
+    id: 9,
+    title: "Record-Breaking Marathon Runner Shares Training Secrets",
+    summary: "After breaking the 1:59 barrier for the second time, champion Emi Watanabe reveals the unconventional high-altitude and sleep optimization regimen behind her success.",
+    content: "In an exclusive interview, Watanabe describes training at 3,500 meters altitude, tracking 14 biometric markers daily, and working with a sleep scientist to optimize recovery — a holistic approach that is reshaping competitive distance running.",
+    category: "Sports",
+    author: "Tom Brady Jr.",
+    date: "2026-05-06",
+    readTime: "6 min read",
+    featured: false,
+    image: "sports"
+  }
+];
+
+server.listen(PORT, () => {
+  console.log(`\n  News Site running at http://localhost:${PORT}\n`);
+});

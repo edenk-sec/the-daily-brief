@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Daily Brief</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-top">
+      <div class="container">
+        <span class="date-line" id="date-line"></span>
+        <div class="header-actions">
+          <button class="btn-subscribe">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container">
+        <div class="logo">
+          <span class="logo-icon">◆</span>
+          <span class="logo-text">The Daily Brief</span>
+        </div>
+        <nav class="nav">
+          <a href="#" class="nav-link active" data-category="all">All</a>
+          <a href="#" class="nav-link" data-category="Technology">Technology</a>
+          <a href="#" class="nav-link" data-category="World">World</a>
+          <a href="#" class="nav-link" data-category="Science">Science</a>
+          <a href="#" class="nav-link" data-category="Finance">Finance</a>
+          <a href="#" class="nav-link" data-category="Health">Health</a>
+          <a href="#" class="nav-link" data-category="Sports">Sports</a>
+        </nav>
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Search articles..." />
+          <span class="search-icon">⌕</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breaking News Ticker -->
+  <div class="ticker-bar">
+    <span class="ticker-label">BREAKING</span>
+    <div class="ticker-wrap">
+      <div class="ticker-content" id="ticker-content"></div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-main" id="hero-main"></div>
+        <div class="hero-side" id="hero-side"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <div class="content-layout">
+        <div class="articles-section">
+          <div class="section-header">
+            <h2 class="section-title" id="section-title">Latest Stories</h2>
+            <div class="view-toggle">
+              <button class="toggle-btn active" id="grid-btn" title="Grid view">▦</button>
+              <button class="toggle-btn" id="list-btn" title="List view">☰</button>
+            </div>
+          </div>
+          <div class="articles-grid" id="articles-grid"></div>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-widget">
+            <h3 class="widget-title">Trending</h3>
+            <ol class="trending-list" id="trending-list"></ol>
+          </div>
+          <div class="sidebar-widget newsletter-widget">
+            <h3 class="widget-title">Newsletter</h3>
+            <p>Get today's top stories delivered to your inbox.</p>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Your email address" />
+              <button class="btn-primary">Sign Up</button>
+            </div>
+          </div>
+          <div class="sidebar-widget">
+            <h3 class="widget-title">By Category</h3>
+            <div class="category-tags" id="category-tags"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Article Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="article-modal">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo">
+            <span class="logo-icon">◆</span>
+            <span class="logo-text">The Daily Brief</span>
+          </div>
+          <p class="footer-tagline">Independent journalism for the curious mind.</p>
+        </div>
+        <div>
+          <h4>Sections</h4>
+          <ul class="footer-links">
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">World</a></li>
+            <li><a href="#">Science</a></li>
+            <li><a href="#">Finance</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" class="social-btn">𝕏</a>
+            <a href="#" class="social-btn">in</a>
+            <a href="#" class="social-btn">f</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The Daily Brief. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
